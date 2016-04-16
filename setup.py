@@ -4,7 +4,7 @@ import easyutils
 
 setup(
         name='easyutils',
-        version=easyutils,
+        version=easyutils.__version__,
         packages=find_packages(),
         description='A utility for China Stock',
         author='shidenggui',
