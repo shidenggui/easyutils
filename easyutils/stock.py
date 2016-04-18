@@ -1,4 +1,3 @@
-import logging
 import re
 
 import requests
@@ -19,9 +18,6 @@ def get_stock_type(stock_code):
         return 'sh'
     if stock_code.startswith(('00', '13', '18', '15', '16', '18', '20', '30', '39', '115', '1318')):
         return 'sz'
-    logging.warn(
-            'cant auto decide {code} stock type, use default simple rule, please manually use sz{code}/sh{code}'.format(
-                    code=stock_code))
     if stock_code.startswith(('5', '6', '9')):
         return 'sh'
     return 'sz'
