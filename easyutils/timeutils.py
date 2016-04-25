@@ -9,6 +9,11 @@ import time
 
 @lru_cache()
 def is_holiday(day):
+    """
+    判断是否节假日
+    :param day: 日期， 格式为 '20160404'
+    :return: bool
+    """
     api = 'http://www.easybots.cn/api/holiday.php'
     params = {'d': day}
     rep = requests.get(api, params)
@@ -17,11 +22,19 @@ def is_holiday(day):
 
 
 def is_holiday_today():
+    """
+    判断今天是否时节假日
+    :return: bool
+    """
     today = datetime.date.today().strftime('%Y%m%d')
     return is_holiday(today)
 
 
 def is_tradetime_now():
+    """
+    判断目前是不是交易时间, 并没有对节假日做处理
+    :return: bool
+    """
     now_time = time.localtime()
     now = (now_time.tm_hour, now_time.tm_min, now_time.tm_sec)
     if (9, 15, 0) <= now <= (11, 30, 0) or (13, 0, 0) <= now <= (15, 0, 0):

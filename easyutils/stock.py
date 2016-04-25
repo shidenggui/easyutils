@@ -24,7 +24,7 @@ def get_stock_type(stock_code):
 
 
 def get_all_stock_codes():
-    """获取所有股票 ID 到 all_stock_code 目录下"""
+    """获取所有股票 ID"""
     all_stock_codes_url = 'http://www.shdjt.com/js/lib/astock.js'
     grep_stock_codes = re.compile('~(\d+)`')
     response = requests.get(all_stock_codes_url)
