@@ -10,15 +10,15 @@ import time
 @lru_cache()
 def is_holiday(day):
     """
-    判断是否节假日
+    判断是否节假日, api 来自百度 apistore: http://apistore.baidu.com/apiworks/servicedetail/1116.html
     :param day: 日期， 格式为 '20160404'
     :return: bool
     """
-    api = 'http://www.easybots.cn/api/holiday.php'
-    params = {'d': day}
+    api = 'http://tool.bitefu.net/jiari/'
+    params = {'d': day, 'apiserviceid': 1116}
     rep = requests.get(api, params)
-    res = rep.json()[day if isinstance(day, str) else day[0]]
-    return True if res == "1" else False
+    res = rep.text
+    return True if res != "0" else False
 
 
 def is_holiday_today():
