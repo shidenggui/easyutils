@@ -57,6 +57,17 @@ def get_stock_type(stock_code):
     :return 'sh' or 'sz'"""
 ```
 
+## get_code_type
+
+```
+def get_code_type(code):
+    """
+    判断代码是属于那种类型，目前仅支持 ['fund', 'stock']
+    :return str 返回code类型, fund 基金 stock 股票
+    """
+```
+
+
 
 ## get_all_stock_codes
 
