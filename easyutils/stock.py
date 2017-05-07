@@ -1,6 +1,7 @@
 import re
 
 import requests
+import io
 
 
 def get_stock_type(stock_code):
@@ -40,3 +41,39 @@ def get_all_stock_codes():
     response = requests.get(all_stock_codes_url)
     stock_codes = grep_stock_codes.findall(response.text)
     return stock_codes
+
+
+def round_price_by_code(price, code):
+    """
+    根据代码类型[股票，基金] 截取制定位数的价格
+    :param price: 证券价格
+    :param code: 证券代码
+    :return: str 截断后的价格的字符串表示
+    """
+    if isinstance(price, str):
+        return price
+
+    typ = get_code_type(code)
+    if typ == 'fund':
+        return '{:.3f}'.format(price)
+    return '{:.2f}'.format(price)
+
+
+def get_ipo_info(only_today=False):
+    import pyquery
+    response = requests.get('http://vip.stock.finance.sina.com.cn/corp/go.php/vRPD_NewStockIssue/page/1.phtml', headers={'accept-encoding': 'gzip, deflate, sdch'})
+    html = response.content.decode('gbk')
+
+    html_obj = pyquery.PyQuery(html)
+    table_html = html_obj('#con02-0').html()
+
+    import pandas as pd
+    df = pd.read_html(io.StringIO(table_html), skiprows=3, converters={
+        '证券代码': str,
+        '申购代码': str}
+    )[0]
+    if only_today:
+        df = df[df['上网发行日期↓'] == '2017-05-08']
+    return df
+
+
