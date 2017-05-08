@@ -19,7 +19,7 @@ def get_stock_type(stock_code):
         return 'sh'
     if stock_code.startswith(('00', '13', '18', '15', '16', '18', '20', '30', '39', '115', '1318')):
         return 'sz'
-    if stock_code.startswith(('5', '6', '9')):
+    if stock_code.startswith(('5', '6', '9', '7')):
         return 'sh'
     return 'sz'
 
