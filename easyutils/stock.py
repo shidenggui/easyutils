@@ -1,4 +1,5 @@
 import re
+import datetime
 
 import requests
 import io
@@ -73,7 +74,8 @@ def get_ipo_info(only_today=False):
         '申购代码': str}
     )[0]
     if only_today:
-        df = df[df['上网发行日期↓'] == '2017-05-08']
+        today = datetime.datetime.now().strftime('%Y-%m-%d')
+        df = df[df['上网发行日期↓'] == today]
     return df
 
 
