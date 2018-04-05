@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='easyutils',
-    version='0.1.6',
+    version='0.1.7',
     packages=find_packages(),
     description='A utility for China Stock',
     author='shidenggui',
